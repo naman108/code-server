@@ -7,7 +7,7 @@ set -eu
 usage() {
   arg0="$0"
   if [ "$0" = sh ]; then
-    arg0="curl -fsSL https://code-server.dev/install.sh | sh -s --"
+    arg0="curl -fsSL https://raw.githubusercontent.com/naman108/code-server/refs/heads/main/install.sh | sh -s --"
   else
     not_curl_usage="The latest script is available at https://code-server.dev/install.sh
 "
@@ -75,10 +75,10 @@ EOF
 
 echo_latest_version() {
   if [ "${EDGE-}" ]; then
-    version="$(curl -fsSL https://api.github.com/repos/coder/code-server/releases | awk 'match($0,/.*"html_url": "(.*\/releases\/tag\/.*)".*/)' | head -n 1 | awk -F '"' '{print $4}')"
+    version="$(curl -fsSL https://api.github.com/repos/naman108/code-server/releases | awk 'match($0,/.*"html_url": "(.*\/releases\/tag\/.*)".*/)' | head -n 1 | awk -F '"' '{print $4}')"
   else
     # https://gist.github.com/lukechilds/a83e1d7127b78fef38c2914c4ececc3c#gistcomment-2758860
-    version="$(curl -fsSLI -o /dev/null -w "%{url_effective}" https://github.com/coder/code-server/releases/latest)"
+    version="$(curl -fsSLI -o /dev/null -w "%{url_effective}" https://github.com/naman108/code-server/releases/latest)"
   fi
   version="${version#https://github.com/coder/code-server/releases/tag/}"
   version="${version#v}"
